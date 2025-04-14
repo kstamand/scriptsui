@@ -1,0 +1,19 @@
+#!/bin/sh
+{
+set -x
+# strip off the string "scrptsui"(first  characters) from the the name ($3) passed in to this script
+string=$3 #pick up name pased
+scriptname="${string:8}" #remove first 8 characters
+
+# now find which line in scriptsui.json file contains that scriptname
+line="$(grep ${scriptname} /jffs/addons/scriptsui/scriptsui.json)"
+
+# now pick up the full path of script to execute that matched the scriptname in the json file 
+#+ matching line example >> {"name":"brctl","path":"/jffs/addons/scriptsui/brctl_show.sh"},
+## startpos="$(echo ${line} | grep  -b -o path | cut -d: -f1)" # find start positon of the string path
+## cutstartpos=$((startpos+11)) # add 11 to where the start of the word path was found
+path="$(echo "$line" | awk -F '"' '{print $8}')"
+
+# last, run the script that matches the script name passed to us and was found in the json file
+sh $path
+} 2>&1 | logger -t $(echo $(basename $0) | grep -Eo '^.{0,23}')[$$]
