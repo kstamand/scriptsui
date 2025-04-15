@@ -5,7 +5,7 @@ This script has been tested on a GT-AX6000, running Asuswrt-Merlin 3004.388.8_4
 ## Overview:
 - Script adds a Custom Webpage to the router WebUI
 - Custom webpage allows for running and viewing results of predefined scripts
-- Dynamic list of scripts to choose from on custom webpage, based on a user customizable JSON file
+- Dynamic list of scripts to choose from on custom webpage are based on a user customizable JSON file 
 
 ## Install:
 *Requires Asuswrt-Merlin, JFFS enabled, and entware installed via AMTM*
